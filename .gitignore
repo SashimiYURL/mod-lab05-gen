@@ -1,3 +1,5 @@
 .vscode/
 ProjCharGenerator/bin/
 ProjCharGenerator/obj/
+ProjCharGenerator.Test/bin/
+ProjCharGenerator.Test/obj/
