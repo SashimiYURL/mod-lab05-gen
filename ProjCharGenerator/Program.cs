@@ -32,6 +32,7 @@ namespace generator
         private readonly string _bigramsFilePath;
         private readonly string _analysisFilePath;
         private int _totalFrequencySum;
+        public Dictionary<string, int> GetBigrams => _bigrams;
 
         public BigramGenerator(string dataPath, string analysisPath)
         {
@@ -75,7 +76,7 @@ namespace generator
             _totalFrequencySum = _bigrams.Values.Sum();
         }
 
-        private string GenerateText(int textLength)
+        public string GenerateText(int textLength)
         {
             if (_bigrams.Count == 0)
                 throw new InvalidOperationException("Files not data!");
@@ -92,7 +93,7 @@ namespace generator
             return result.ToString();
         }
 
-        private string NextRandomBigram()
+        public string NextRandomBigram()
         {
             int randomValue = _random.Next(_totalFrequencySum);
             int cumulativeSum = 0;
@@ -165,7 +166,7 @@ namespace generator
             _totalFrequencySum = _wordFrequencies.Values.Sum();
         }
 
-        private string GenerateText()
+        public string GenerateText()
         {
             if (_wordFrequencies.Count == 0)
                 throw new InvalidOperationException("Word frequencies not loaded");
@@ -183,7 +184,7 @@ namespace generator
             return result.ToString();
         }
 
-        private string NextRandomWord()
+        public string NextRandomWord()
         {
             int randomValue = _random.Next(_totalFrequencySum);
             int cumulativeSum = 0;
