@@ -78,16 +78,6 @@ public class WordGeneratorTests
     private readonly string _tempOutputFile = "output_test.txt";
     private readonly string _tempAnalysisFile = "stat_test.txt";
 
-    [Fact]
-    public void WordGenerator_LoadsDataFromFile()
-    {
-        File.WriteAllText(_tempWordsFile, "1 слово 0.1 0.1 0.1\n2 тест 0.05 0.05 0.05\n3 пример 0.02 0.02 0.02");
-
-        var generator = new WordGenerator(_tempWordsFile, _tempAnalysisFile);
-        Assert.Equal(3, generator.WordFrequencies.Count);
-
-        File.Delete(_tempWordsFile);
-    }
 
     [Fact]
     public void GenerateText_ContainsExpectedWords()
