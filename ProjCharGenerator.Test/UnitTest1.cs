@@ -93,6 +93,17 @@ public class WordGeneratorTests
         File.Delete(_tempWordsFile);
     }
 
+     [Fact]
+    public void WordGenerator_LoadsDataFromFile()
+    {
+        File.WriteAllText(_tempWordsFile, "1 слово 0.1 0.1 100\n2 тест 0.05 0.05 0.05\n3 пример 0.02 0.02 100");
+
+        var generator = new WordGenerator(_tempWordsFile, _tempAnalysisFile);
+        Assert.Equal(3, generator.WordFrequencies.Count);
+
+        File.Delete(_tempWordsFile);
+    }
+
     [Fact]
     public void GenerateWordsData_CreatesOutputFile()
     {
