@@ -74,7 +74,7 @@ public class BigramGeneratorTests
 
 public class WordGeneratorTests
 {
-    private readonly string _tempWordsFile = "bigrams_test.txt";
+    private readonly string _tempWordsFile = "words_test.txt";
     private readonly string _tempOutputFile = "output_test.txt";
     private readonly string _tempAnalysisFile = "stat_test.txt";
 
@@ -90,7 +90,7 @@ public class WordGeneratorTests
         Assert.Contains("тест", text);
         Assert.Contains("пример", text);
 
-        File.Delete(_tempWordsFile);
+        // File.Delete(_tempWordsFile);
     }
 
      [Fact]
@@ -99,9 +99,10 @@ public class WordGeneratorTests
         File.WriteAllText(_tempWordsFile, "1 слово 0.1 0.1 100\n2 тест 0.05 0.05 0.05\n3 пример 0.02 0.02 100");
 
         var generator = new WordGenerator(_tempWordsFile, _tempAnalysisFile);
+        generator.GenerateText();
         Assert.Equal(3, generator.WordFrequencies.Count);
 
-        File.Delete(_tempWordsFile);
+        // File.Delete(_tempWordsFile);
     }
 
     [Fact]
@@ -113,9 +114,9 @@ public class WordGeneratorTests
         generator.GenerateWordsData(_tempOutputFile);
         Assert.True(File.Exists(_tempOutputFile));
 
-        File.Delete(_tempWordsFile);
-        File.Delete(_tempOutputFile);
-        File.Delete(_tempAnalysisFile);
+        // File.Delete(_tempWordsFile);
+        // File.Delete(_tempOutputFile);
+        // File.Delete(_tempAnalysisFile);
     }
 
     [Fact]
@@ -127,7 +128,7 @@ public class WordGeneratorTests
         string word = generator.NextRandomWord();
         Assert.Contains(word, generator.WordFrequencies.Keys);
 
-        File.Delete(_tempWordsFile);
+        // File.Delete(_tempWordsFile);
     }
 
     [Fact]
@@ -139,7 +140,7 @@ public class WordGeneratorTests
         File.Delete(missingFile);
         Assert.Throws<FileNotFoundException>(() => new WordGenerator(missingFile, _tempAnalysisFile));
 
-        File.Delete(_tempWordsFile);
+        // File.Delete(_tempWordsFile);
     }
 
     [Fact]
@@ -151,7 +152,7 @@ public class WordGeneratorTests
         var exception = Assert.Throws<InvalidOperationException>(() => generator.GenerateText());
         Assert.Equal("Word frequencies not loaded", exception.Message);
 
-        File.Delete(_tempWordsFile);
+        // File.Delete(_tempWordsFile);
     }
 }
 
